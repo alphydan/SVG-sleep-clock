@@ -2,6 +2,7 @@ from svgfig import *
 from math import *
 import datetime as dti
 from time import strptime
+from mysvglib import *
 
 
 ##### Parametric equation of Circle ####
@@ -10,50 +11,21 @@ from time import strptime
 # y = r cos(t) #
 ################
 
+###### Functions used:
+
+# time_to_coordinates(datetime.datetime, 12/24, radius)
+# outputs the list [x,y]
+
+
+
+
 nowtime=dti.datetime.now()
-
-def TimeToCoordinates(dtime, option2412=24, radius=3):
-    """
-    Converts a datetime object to coordinates on the clock
-    Arguments:
-    - `dtime`: a date time object of the form '2012-02-12 18:56:17.977235'
-    - `option2412`:
-    it can be accessed with dtime.year, dtime.month, dtime.hour, etc.
-    """
-    if type(dtime) is not dti.datetime:
-        raise TypeError('arg must be a datetime, not a %s' % type(dtime))
-    else:
-        if option2412==24:
-            decimalhour=dtime.hour+dtime.minute/60.0 #convert minutes to decimal 14h30 would be 14.5
-            angle= (pi/2)-(decimalhour*2*pi/24)  # transform the hour into an angle
-            coordinates=[radius*cos(angle), radius*sin(angle)] #turn angle to coordinates
-            return coordinates
-
-        elif option2412==12:
-            decimalhour=dtime.hour+dtime.minute/60.0
-            if decimalhour<12:
-                angle= (decimalhour*2*pi/12)+(pi/2)
-                coordinates=[radius*cos(angle), radius*sin(angle)]
-            elif decimalhour>=12:
-                angle= (decimalhour*2*pi/12)+(pi/2)
-                coordinates=[radius*cos(angle), radius*sin(angle)]
-            return coordinates
-
-        else:
-            print 'use the function as TimeToCoordinates(datetime.datetime object, 24 or 12)'
-    
-
 sometime = "2005-12-06T20:10:14"
 somedatetime = dti.datetime(*strptime(sometime, "%Y-%m-%dT%H:%M:%S")[0:6])
 print somedatetime
 # dti.datetime(2005, 12, 6, 12, 13, 14)
 
-
-        
-    
-
-
-coordsnow=TimeToCoordinates(somedatetime,24)
+coordsnow=time_to_coordinates(somedatetime,24)
 print coordsnow, '\n', nowtime
 
 
