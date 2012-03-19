@@ -36,21 +36,6 @@ for i in range(2,24,4):
 # mycleverticks[0]="midnight"
 # mycleverticks[pi]="noon"
 
-piticks=[2*pi*i/12 for i in range(1,12)]
-pi_mini_ticks=[2*pi*i/48 for i in range(1,48)]    
-
-mi_circle_axis=CurveAxis("-3*cos(t+pi/2),3*sin(t+pi/2)", 0, 2*pi-0.08, \
-                         arrow_end="myfinalarrow",\
-                         # ticks= [1,2,3,4,5,6],\
-                         ticks=piticks, labels=False,\
-                         miniticks=False)
-mi_circle_axis.text_start =-6 #how far away from the circle is the tic-text?
-mi_circle_axis.text_angle = 90 #orientation of the hour legend
-
-
-inner_circle_axis=CurveAxis("-2.8*cos(t+pi/2),2.8*sin(t+pi/2)", 0, 2*pi-0.05, \
-                            ticks=pi_mini_ticks, labels=False,
-                         miniticks=False)
 
 
 
