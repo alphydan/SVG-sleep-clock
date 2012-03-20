@@ -174,7 +174,7 @@ def arc_between_times(ini_datetime,final_datetime):
         print 'the times are more than 24h apart'
         return None
     else: #the hours are between 5mn and 24h apart.
-        if final_datetime.hour>=12 and ini_datetime.hour<=12:
+        if final_datetime.hour>12 and ini_datetime.hour<12:
             # If two datetimes have the same date
             #  (day/month/year) but the times are on different
             # sides of mid-day, for ex. 11h and 13h, they belong on different clocks.
@@ -214,7 +214,7 @@ def create_chese_slice(arc_of_time, sleep_phase=5):
     - `datetime2`: datetime object
     - `phase`: Undefined(0), Awake(1), REM(2), light(3), deep(4), InBed (5)
     """
-    sleep_phase_color={0:"#FFFFFF", 1: "rgb(190,190,190)", 2: "#ADFF2F", 3: "#E3E3E3", 4: "#292929", 5: "#00EE76"}
+    sleep_phase_color={0:"#FFFFFF", 1: "#dddddd", 2: "#ADFF2F", 3: "#E3E3E3", 4: "#292929", 5: "#00EE76"}
     sleep_phase_opacity={0: 1, 1: 0.1, 2: 1, 2: 0.7, 3: 0.8, 4: 0.9, 5: 0.8}
     the_slice=Poly(arc_of_time, "lines", True, stroke="rgb(163,163,163)", stroke_width=0.1,
                    fill=sleep_phase_color[sleep_phase], fill_opacity=sleep_phase_opacity[sleep_phase])
@@ -225,7 +225,11 @@ def create_chese_slice(arc_of_time, sleep_phase=5):
 
 
 
-times=[dti.datetime(2016,11,22,21,0,0), dti.datetime(2016,11,23,2,10,0), dti.datetime(2016,11,23,2,10,0), dti.datetime(2016,11,23,2,50,0), dti.datetime(2016,11,23,3,30,0), dti.datetime(2016,11,23,4,0,0)]
+times=[[dti.datetime(2016,11,22,23,0,0), dti.datetime(2016,11,23,2,00,0), 5],
+       [dti.datetime(2016,11,23,7,0,0), dti.datetime(2016,11,23,7,30,0), 5],
+       [dti.datetime(2016,11,22,12,00,0), dti.datetime(2016,11,22,12,30,0), 5],
+       [dti.datetime(2016,11,22,17,00,0), dti.datetime(2016,11,22,17,30,0), 5],
+       ]
 
 
 
@@ -239,13 +243,26 @@ skeleton=create_clock_skeleton("en")
 mywin = window(-4, 4, -4, 4, x=0, width=100)
 
 
-for i in range(3):
-    arc=arc_between_times(times[2*i],times[2*i+1])
-    the_slice=create_chese_slice(arc,i)
+for i in range(4):
+    arc=arc_between_times(times[i][0],times[i][1])
+    the_slice=create_chese_slice(arc,times[i][2])
     cheese=Fig(the_slice,trans=mywin).SVG()
     skeleton.append(cheese)
 
 skeleton.inkview()
+
+# def create_legend():
+#     """Creates a legend with boxes for each color
+#     """
+#     sleep_phase_color={0:"#FFFFFF", 1: "#dddddd", 2: "#ADFF2F", 3: "#E3E3E3", 4: "#292929", 5: "#00EE76"}
+#     sleep_phase_opacity={0: 1, 1: 0.1, 2: 1, 2: 0.7, 3: 0.8, 4: 0.9, 5: 0.8}
+#     unknown=SVG("rect", x=10, y=10, width=60, height=60, fill=sleep_phase_color, opacity=sleep_phase_opacity)
+#     legend= SVG("rect", x=30, y=30, width=60, height=60, fill="blue")
+
+
+# create_legend().inkview()
+
+
 # thearc=arc_between_times(tt1, tt2)
 # the_slice=create_chese_slice(thearc,5)
 
