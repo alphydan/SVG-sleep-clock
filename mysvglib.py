@@ -8,12 +8,28 @@ from math import *
 import datetime as dti
 from time import strptime
 
+###########  This library is to implement the following strategy   ##########
+##
 
-##### Parametric equation of Circle ####
-   ################
-   # x = r cos(t) #
-   # y = r cos(t) #
-   ################
+
+class SleepTimeStamp(object):
+    """This class describes time stamps with a bunch of possible attributes like:
+    `dti`: Datetime object
+    `BEM`: begining, end or middle of a time period.
+    `phase`: Sleep phase: Undefined(0), Awake(1), REM(2), light(3), deep(4), InBed (5), Snoozing (6).
+    `subjective_awareness`: scale from 1 to 10.
+    `comment`:
+    """
+    # attributes
+    
+    def __init__(self, dti, BEM, phase, subjective_awareness, comment):
+        """
+        """
+        
+        
+
+
+
 
 def time_to_coordinates(dtime, option2412=24, radius=3):
     """
@@ -31,6 +47,14 @@ def time_to_coordinates(dtime, option2412=24, radius=3):
             angle= (pi/2)-(decimalhour*2*pi/24)  # transform the hour into an angle
             coordinates=(radius*cos(angle), radius*sin(angle)) #turn angle to coordinates
             return coordinates
+
+
+##### Parametric equation of Circle ####
+   ################
+   # x = r cos(t) #
+   # y = r cos(t) #
+   ################
+
 
         elif option2412==12:
             decimalhour=dtime.hour+dtime.minute/60.0
@@ -206,7 +230,7 @@ def arc_series(ini_datetime, final_datetime):
     return the_coords
 
 
-def create_chese_slice(arc_of_time, sleep_phase=5):
+def create_cheese_slice(arc_of_time, sleep_phase=5):
     """Creates the shape of the arc of a circle between two times
     the circle is approximated with 5mn intervals
     Arguments:
@@ -239,7 +263,7 @@ times=[[dti.datetime(2016,11,22,23,0,0), dti.datetime(2016,11,23,2,00,0), 5],
 # print tt1+2*dadelta, danow+10*dadelta
 
 
-skeleton=create_clock_skeleton("en")
+skeleton=create_clock_skeleton("fr")
 mywin = window(-4, 4, -4, 4, x=0, width=100)
 
 

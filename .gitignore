@@ -2,6 +2,7 @@
 *.tmp
 *.*.sw*
 *.pyc
+*.png
 #*#
 .#*
 .gitignore
